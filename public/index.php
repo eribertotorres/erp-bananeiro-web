@@ -1,3 +1,7 @@
+<?php
+require dirname(__DIR__) . '/app/bootstrap.php';
+$usuario = require_auth();
+?>
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -19,9 +23,17 @@
                 <ul class="navigation">
                     <li><a href="./" aria-current="page">Início</a></li>
                     <li><span class="nav-upcoming">Bilhetes <small>Em breve</small></span></li>
+                    <li><span class="nav-upcoming">Consulta <small>Em breve</small></span></li>
                     <li><span class="nav-upcoming">Consolidação <small>Em breve</small></span></li>
                 </ul>
             </nav>
+            <div class="session-actions">
+                <span><?= escape($usuario['nome']) ?></span>
+                <form method="post" action="logout.php">
+                    <input type="hidden" name="csrf" value="<?= escape(csrf_token()) ?>">
+                    <button type="submit">Sair</button>
+                </form>
+            </div>
         </div>
     </header>
 
